@@ -20,12 +20,10 @@ function refresh(planetele) {
 		var nume = planetele[i].name;
 		//planet+='<li><a href="#">' + nume + '</a></li>';
 
-		descriere+='<div class="col-xs-2 col-sm-8  placeholder">';
-		if (nume == "Saturn") 
-			descriere+='<img align="left" src="' + planetele[i].poza + '" width="250" height="100"  class="img-responsive" alt="Descriere ' + nume + '">';
-		else
-			descriere+='<img align="left" src="' + planetele[i].poza + '" width="150" height="150" class="img-responsive" alt="Descriere ' + nume + '">';
-		descriere+='<h4>' + nume + '</h4>';
+		descriere+='<div class="col-xs-2 col-sm-8 placeholder">';
+		if (i!=0) descriere+='<hr />';
+		descriere+='<h3>' + nume + '</h3>';
+		descriere+='<img align="left" src="' + planetele[i].poza + '" width="200" height="200" class="img-responsive" alt="Descriere ' + nume + '">';
 		descriere+='<span class="text-muted">' + planetele[i].detaliu + '</span>';
 		descriere+='</div>';
 
@@ -49,7 +47,7 @@ planets.on("value", function(snapshot) {
 			descrierePlaneta = data[key].Descriere ? data[key].Descriere : 'Nu are descriere';
 			distanta = data[key].distanta ? data[key].distanta : 'Nu are distanță';
 			nr = data[key].nr ? data[key].nr : 'Nu are sateliți';
-			poza = data[key].poza ? data[key].poza : 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==';
+			poza = data[key].png ? data[key].png : 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==';
 			if (planetName.trim().length > 0) {
 				planetele.push({
 					name: planetName,
