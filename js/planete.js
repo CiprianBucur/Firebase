@@ -1,6 +1,17 @@
 var url = 'https://planetesiluni.firebaseio.com/Planete';
 var planets = new Firebase(url);
 
+function caut(event) {
+	if (event.which == 13 || event.keyCode == 13) {
+		var text = document.getElementById('caut').value.trim();
+		if (text.length > 0) {
+			alert("Vrei să cauți: " + text);
+		}
+		document.getElementById('caut').value = '';
+		return false;
+	}
+};
+
 function refresh(planetele) {
 	var planet = '';
 	var descriere = '';
@@ -36,8 +47,8 @@ planets.on("value", function(snapshot) {
 		if (data.hasOwnProperty(key)) {
 			planetName = data[key].planetName ? data[key].planetName : 'Nu are nume';
 			descrierePlaneta = data[key].Descriere ? data[key].Descriere : 'Nu are descriere';
-			distanta = data[key].distanta ? data[key].distanta : 'Nu are distanta';
-			nr = data[key].nr ? data[key].nr : 'Nu are sateliti';
+			distanta = data[key].distanta ? data[key].distanta : 'Nu are distanță';
+			nr = data[key].nr ? data[key].nr : 'Nu are sateliți';
 			poza = data[key].poza ? data[key].poza : 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==';
 			if (planetName.trim().length > 0) {
 				planetele.push({

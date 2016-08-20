@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Planetele si lunile sistemului solar">
+    <meta name="description" content="Planetele și lunile sistemului solar">
     <meta name="author" content="Ciprian">
 
-    <title>Planetele si lunile sistemului solar</title>
+    <title>Planetele și lunile sistemului solar</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet"> 
@@ -18,15 +18,13 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="home.html">Planetele si lunile sistemului solar</a>
+          <a class="navbar-brand" href="home.html">Planetele și lunile sistemului solar</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="contact.html">Contact</a></li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Cautare...">
-          </form>
+            <input type="text" onkeypress="return caut(event)" id="caut" class="navbar-form navbar-right form-control" placeholder="Căutare..." />
         </div>
       </div>
     </nav>
@@ -39,8 +37,8 @@
               <thead>
                 <tr>
                   <th>Planeta</th>
-                  <th>Distanta</th>
-                  <th>Nr. sateliti</th>
+                  <th>Distanța</th>
+                  <th>Număr sateliți</th>
                 </tr>
               </thead>
               <tbody id="detaliiPlanete">
@@ -52,7 +50,7 @@
           <h1 class="page-header">Planetele: </h1>
 
           <div class="row placeholders" id="descrierePlanete">
-			Se incarca...
+			Se încarcă...
 			<span class="glyphicon glyphicon-refresh gly-ani" style="font-size:100px;"></span>
           </div>
         </div>
