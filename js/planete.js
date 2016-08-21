@@ -10,7 +10,7 @@ function caut(event) {
 		document.getElementById('caut').value = '';
 		return false;
 	}
-};
+}
 
 function refresh(planetele) {
 	var planet = '';
@@ -18,12 +18,12 @@ function refresh(planetele) {
 	var detalii = '';
 	for (var i = 0; i < planetele.length; i++) {
 		var nume = planetele[i].name;
-		//planet+='<li><a href="#">' + nume + '</a></li>';
-
-		descriere+='<div class="col-xs-2 col-sm-8 placeholder">';
-		if (i!=0) descriere+='<hr />';
-		descriere+='<h3>' + nume + '</h3>';
+		planet+='<li><a href="' + nume + '.html">' + nume + '</a></li>';
+	
+		descriere+='<div class=" col-sm-12 placeholder">';
+		if (i!=0) descriere+='<hr /><br />';
 		descriere+='<img align="left" src="' + planetele[i].poza + '" width="200" height="200" class="img-responsive" alt="Descriere ' + nume + '">';
+		descriere+='<h3>' + nume + '</h3>';
 		descriere+='<span class="text-muted">' + planetele[i].detaliu + '</span>';
 		descriere+='</div>';
 
@@ -32,11 +32,11 @@ function refresh(planetele) {
 		detalii += '<td>' + planetele[i].distanta + ' UA</td>';
 		detalii += '<td>' + planetele[i].sateliti + '</td>';
 		detalii += '</tr>';
-	};
-	//document.getElementById('planets').innerHTML = planet;
+	}
+	document.getElementById('planets').innerHTML = planet;
 	document.getElementById('descrierePlanete').innerHTML = descriere;
 	document.getElementById('detaliiPlanete').innerHTML = detalii;
-};
+}
 
 planets.on("value", function(snapshot) {
 	var data = snapshot.val();
@@ -61,4 +61,4 @@ planets.on("value", function(snapshot) {
 		}
 	}
 	refresh(planetele);
-});
+})
