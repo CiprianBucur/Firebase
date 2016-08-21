@@ -6,8 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Planetele și lunile sistemului solar">
     <meta name="author" content="Ciprian">
-
-    <title>Planetele și lunile sistemului solar</title>
+	<script type="text/javascript"> 
+		var fileName = decodeURIComponent((window.location.href.substring(window.location.href.lastIndexOf("/")+1,window.location.href.lastIndexOf("."))+'').replace(/\+/g, '%20'));
+	</script>
+    <title>Planetele și lunile sistemului solar - <script type="text/javascript">document.write(fileName)</script>
+</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet"> 
@@ -34,13 +37,13 @@
       <div class="row">
         <div class="col-sm-2 sidebar">
 		 <ul class="nav nav-sidebar">
-		   <li class="active"><a href="home.html">Home<span class="sr-only">(current)</span></a></li>
+		   <li><a href="home.html">Home</a></li>
          </ul>
 		 <ul class="nav nav-sidebar" id="planets">
          </ul>
         </div>
-        <div class="col-sm-7 col-sm-offset-2 main">
-          <h1 class="page-header">Planetele: </h1>
+        <div class="col-sm-8 col-sm-offset-2 main">
+          <h1 class="page-header"><script type="text/javascript">document.write(fileName)</script>: </h1>
 
           <div class="row placeholders" id="descrierePlanete">
 			Se încarcă...
@@ -48,25 +51,25 @@
 			<span class="sr-only">Loading...</span>
           </div>
         </div>
-		<div class="col-sm-3 col-sm-offset-9 sidebar">
-			<div class="table-responsive">
-				<table class="table table-striped">
-				  <thead>
-					<tr>
-					  <th>Planeta</th>
-					  <th>Distanța</th>
-					  <th>Număr sateliți</th>
-					</tr>
-				  </thead>
-				  <tbody id="detaliiPlanete">
-				  </tbody>
-				</table>
-		  </div>
-		</div>
+		
+        <div class="col-sm-2 col-sm-offset-10 sidebar">
+          <div class="table-responsive">
+<!--          <h2>Lunile: </h2>-->
+		  <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Lunile lui <script type="text/javascript">document.write(fileName)</script>: </th>
+                </tr>
+              </thead>
+			  <tbody id="moons">
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
 
     <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>
-	<script type="text/javascript" src="js/planete.js"></script>
+	<script type="text/javascript" src="js/dp.js"></script>
   </body>
 </html>
