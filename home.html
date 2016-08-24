@@ -8,8 +8,7 @@
     <meta name="author" content="Ciprian">
 
     <title>Planetele și lunile sistemului solar</title>
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet"> 
 	<link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<style>
@@ -18,6 +17,14 @@
 		  width: 70%;
 		  margin: auto;
 	  }
+	  .glyphicon-refresh-animate {
+			-animation: spin .9s infinite linear;
+			-webkit-animation: spin2 .9s infinite linear;
+		}
+		@-webkit-keyframes spin2 {
+			from { -webkit-transform: rotate(0deg);}
+			to { -webkit-transform: rotate(360deg);}
+		}
 	</style>
   </head>
 
@@ -51,11 +58,10 @@
 			<ol class="carousel-indicators" id="caruselPlanete">
 			</ol>
 			<div class="carousel-inner" role="listbox" id="caruselDetalii">
-				<center>
+				<center><h2>
 				Se încarcă...
-				<i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>
-				<span class="sr-only">Loading...</span>
-				</center>
+				<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+				</h2></center>
 			</div>
 			<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev" id="butonInapoi" style="display: none;">
 				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>

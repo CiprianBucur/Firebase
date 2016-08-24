@@ -22,9 +22,9 @@ function refresh(planetele) {
 	var detalii = '';
 	for (var i = 0; i < planetele.length; i++) {
 		var nume = planetele[i].name;
-		planet+='<li><a href="' + nume + '.html">' + nume + '</a></li>';
+		planet+='<li data-target="#myCarousel" data-slide-to="' + i + '" ><a href="#">' + nume + '</a></li>';
 		if (i==0)
-			caruselPlaneta+='<li data-target="#myCarousel" data-slide-to="' + i + '"  class="active"></li>';
+			caruselPlaneta+='<li data-target="#myCarousel" data-slide-to="' + i + '" class="active"></li>';
 		else
 			caruselPlaneta+='<li data-target="#myCarousel" data-slide-to="' + i + '"></li>';
 		if (i==0)
