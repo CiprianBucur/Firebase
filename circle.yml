@@ -1,8 +1,3 @@
 test:
   override:
   - echo 'no tests, just say us Okay!'
-  
-deployment:
-  acceptance:
-    branch: master
-    
