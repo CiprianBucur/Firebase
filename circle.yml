@@ -1,1 +1,9 @@
-echo 'no tests, just say us Okay!'
+test:
+  override:
+  - echo 'no tests, just say us Okay!'
+  
+deployment:
+  acceptance:
+    branch: master
+    commands:
+    - ./deploy_prod.sh
