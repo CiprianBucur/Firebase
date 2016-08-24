@@ -8,11 +8,17 @@
     <meta name="author" content="Ciprian">
 
     <title>Planetele și lunile sistemului solar</title>
-
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
     <link href="css/dashboard.css" rel="stylesheet"> 
 	<link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
+	<style>
+	  .carousel-inner > .item > img,
+	  .carousel-inner > .item > a > img {
+		  width: 70%;
+		  margin: auto;
+	  }
+	</style>
   </head>
 
   <body>
@@ -41,12 +47,25 @@
         </div>
         <div class="col-sm-7 col-sm-offset-2 main">
           <h1 class="page-header">Planetele: </h1>
-
-          <div class="row placeholders" id="descrierePlanete">
-			Se încarcă...
-			<i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>
-			<span class="sr-only">Loading...</span>
-          </div>
+		  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+			<ol class="carousel-indicators" id="caruselPlanete">
+			</ol>
+			<div class="carousel-inner" role="listbox" id="caruselDetalii">
+				<center>
+				Se încarcă...
+				<i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>
+				<span class="sr-only">Loading...</span>
+				</center>
+			</div>
+			<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev" id="butonInapoi" style="display: none;">
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				<span class="sr-only">Înapoi</span>
+			</a>
+			<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next" id="butonInainte" style="display: none;">
+				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				<span class="sr-only">Înainte</span>
+			</a>
+		  </div>
         </div>
 		<div class="col-sm-3 col-sm-offset-9 sidebar">
 			<div class="table-responsive">
@@ -70,5 +89,18 @@
 	<script type="text/javascript" src="js/planete.js"></script>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script>
+		(function( $ ){
+			$.fn.afisezButoanele = function() {
+				$( "#butonInapoi" ).show();
+				$( "#butonInainte" ).show();
+				return this;
+			}; 
+		})( jQuery );
+
+		$(document).ready(function() {
+		//			
+		});
+	</script>
   </body>
 </html>
