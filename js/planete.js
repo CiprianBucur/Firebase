@@ -34,7 +34,7 @@ function refresh(planetele) {
 		descriere+='<img src="' + planetele[i].url + '" alt="Descriere ' + nume + '" class="img-responsive" >';
 		descriere+='<div class="carousel-caption">';
 		descriere+='<h3>' + nume + '</h3>';
-		descriere+='<p>' + planetele[i].detaliu +'.</p>';
+		descriere+='<p>' + planetele[i].detaliu +'</p>';
 		descriere+='</div></div>';
 
 		detalii+='<tr>';
@@ -82,7 +82,6 @@ function refreshLuni(luni) {
 			detalii += '<td colspan="3">Nu are sateliți</td>';
 		document.getElementById('col' + i + 'Content').innerHTML = detalii;
 		detalii = '';
-
 	}
 }
 
@@ -106,12 +105,12 @@ planets.on("value", function(snapshot) {
 					poza: poza,
 					url: url,
 					key: key
-				})
+				});
 			}
 		}
 	}
 	refresh(planetele);
-})
+});
 
 luni.on("value", function(snapshot) {
     var data = snapshot.val();
@@ -127,9 +126,9 @@ luni.on("value", function(snapshot) {
 					mName: mName,
 					nr: nr,
 					key: key
-				})
+				});
 			}				
         }
     }
     refreshLuni(luni);
-})
+});
