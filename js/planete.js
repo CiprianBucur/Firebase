@@ -31,11 +31,14 @@ function refresh(planetele) {
 		descriere+='</div>';
 		
 		detalii+='<tr>';
-		detalii += '<td><h4><a href="#col' + i + 'Content" data-toggle="collapse">' + nume + '</a></h4></td>';   
+		detalii += '<td><h4><a href="#col' + i + 'Content" data-toggle="collapse">' + nume + '</a></h4></td>';
 		detalii += '<td><h4>' + planetele[i].distanta + ' UA</h4></td>';
 		detalii += '<td><h4>' + planetele[i].sateliti + '</h4></td>';
 		detalii+='</tr>';
 		
+		detalii += '<tr id="col' + i + 'Content" class="collapse">';
+		detalii += '<td colspan="3">';
+		detalii += '</td></tr>';
 	}
 	document.getElementById('planets').innerHTML = planet;
 	document.getElementById('descrierePlanete').innerHTML = descriere;
@@ -49,7 +52,7 @@ function refreshLuni(luni) {
 		var j=0;
 		if (luni[i].nr>0) {
 			var data = luni[i].mName;
-			detalii += '<tr id="col' + i + 'Content" class="collapse">';
+			//detalii += '<tr id="col' + i + 'Content" class="collapse">';
 			detalii += '<td colspan="3">';
 			for (var key in data) {		
 				if (data.hasOwnProperty(key)) {
@@ -60,10 +63,14 @@ function refreshLuni(luni) {
 				}
 				j++;
 			}
-			detalii += '</td></tr>';
+			detalii += '</td>';//</tr>';
 		}
+		else 
+			detalii += '<td colspan="3">Nu are sateliți</td>';
+		document.getElementById('col' + i + 'Content').innerHTML = detalii;
+		detalii = '';
+
 	}
-	document.getElementById('satelitiPlanete').innerHTML = detalii;
 }
 
 planets.on("value", function(snapshot) {
