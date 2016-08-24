@@ -5,5 +5,4 @@ test:
 deployment:
   acceptance:
     branch: master
-    commands:
-    - ./deploy_prod.sh
+    
