@@ -55,7 +55,7 @@ function refresh(planetele) {
 	
 	document.getElementById('butonInapoi').class = "right carousel-control";
 	document.getElementById('butonInainte').class = "right carousel-control";
-	$().afisezButoanele();
+	$.afisezButoanele();
 }
 
 function refreshLuni(luni) {
@@ -132,3 +132,12 @@ luni.on("value", function(snapshot) {
     }
     refreshLuni(luni);
 });
+
+function getUrlParams(){
+	return window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+}
+
+function getUrlVar(key){
+	var result = new RegExp(key + "=([^&]*)", "i").exec(window.location.search); 
+	return result && unescape(result[1]) || ""; 
+}
