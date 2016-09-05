@@ -90,10 +90,20 @@
       </div>
     </div>
 
-    <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>
-	<script type="text/javascript" src="js/planete.js"></script>
+<!--<script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>-->
+	<!--<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>-->
+	<!--<script src="https://cdn.firebase.com/js/client/3.3.0/firebase.js"></script>-->
+	<!--<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-database.js"></script>
+<!-- <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-storage.js"></script> -->
+
+	<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+	<script type="text/javascript" src="js/planete.js"></script>-->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js"></script>
+	
 	<script>
 		(function($){
 			$.afisezButoanele = function() {
@@ -103,8 +113,49 @@
 			}; 
 		})(jQuery);
 
+
+		  
+		
+	/*
+firebase.auth().createUserWithEmailAndPassword("my@email.com", "password").catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+        console.log("ERROR11111111");
+        console.log(errorCode, errorMessage);
+  // ...
+});
+*/
+/*firebase.auth().signInWithEmailAndPassword("my@email.com", "password").catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  console.log("ERROR222222222");
+        console.log(errorCode, errorMessage);
+  // ...
+});*/
+/*
+firebase.auth().signInWithEmailAndPassword("my@email.com", "password").then(function(firebaseUser) {
+  console.log("Signed in as:", firebaseUser.uid);
+}).catch(function(error) {
+  console.error("Authentication failed:", error);
+});
+/*
+$firebase.auth().$signInWithEmailAndPassword("my@email.com", "password").then(function(firebaseUser) {
+  console.log("Signed in as:", firebaseUser.uid);
+}).catch(function(error) {
+  console.error("Authentication failed:", error);
+});
+*/
+/*
+firebase.auth().signInAnonymously().then(function(firebaseUser) {
+  console.log("Signed in as:", firebaseUser.uid);
+}).catch(function(error) {
+  console.error("Authentication failed:", error);
+});
+
+/**/
 		$(document).ready(function() {
-		//			
 		});
 	</script>
   </body>
