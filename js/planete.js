@@ -1,16 +1,3 @@
-/*var url = 'https://planetesiluni.firebaseio.com/Planete';
-var planets = new Firebase(url);
-
-var urlLuni = 'https://planetesiluni.firebaseio.com/Luni';
-var luni = new Firebase(urlLuni);
-*/
-/*
-
-<script>
-</script>
-    */
-	
-  // Initialize Firebase
 var config = {
 	apiKey: "AIzaSyAtLoLbOPgEisu42BOvpwxle1OnKhtJ4jg",
 	authDomain: "planetesiluni.firebaseapp.com",
@@ -20,6 +7,37 @@ var config = {
 firebase.initializeApp(config);
 var planets = firebase.database().ref("Planete");
 var luni = firebase.database().ref("Luni");
+
+firebase.auth().signOut().then(function() {
+	console.log("afara cu succes");
+  // Sign-out successful.
+}, function(error) {
+	console.log("afara cu eroare: ", error);
+  // An error happened.
+});
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if (!user) {
+		console.log("nelogat");
+	}
+	else {
+		user.providerData.forEach(function (profile) {
+			console.log("Sign-in provider: "+profile.providerId);
+			console.log("  Provider-specific UID: "+profile.uid);
+			console.log("  Name: "+profile.displayName);
+			console.log("  Email: "+profile.email);
+			console.log("  Photo URL: "+profile.photoURL);
+		});
+		//console.log("logat: ", user);
+  }
+});
+
+firebase.auth().signInWithEmailAndPassword("my@email.com", "password").then(function(firebaseUser) {
+  console.log("Signed in as:", firebaseUser.uid);
+}).catch(function(error) {
+  //console.error("Authentication failed:", error);
+  console.error("Login error: \nError code: ", error.code, "\nError messsage: ", error.message);
+});
 
 function caut(event) {
 	if (event.which == 13 || event.keyCode == 13) {
