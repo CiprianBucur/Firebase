@@ -1,8 +1,25 @@
-var url = 'https://planetesiluni.firebaseio.com/Planete';
+/*var url = 'https://planetesiluni.firebaseio.com/Planete';
 var planets = new Firebase(url);
 
 var urlLuni = 'https://planetesiluni.firebaseio.com/Luni';
 var luni = new Firebase(urlLuni);
+*/
+/*
+
+<script>
+</script>
+    */
+	
+  // Initialize Firebase
+var config = {
+	apiKey: "AIzaSyAtLoLbOPgEisu42BOvpwxle1OnKhtJ4jg",
+	authDomain: "planetesiluni.firebaseapp.com",
+	databaseURL: "https://planetesiluni.firebaseio.com",
+	storageBucket: "planetesiluni.appspot.com",
+};
+firebase.initializeApp(config);
+var planets = firebase.database().ref("Planete");
+var luni = firebase.database().ref("Luni");
 
 function caut(event) {
 	if (event.which == 13 || event.keyCode == 13) {
