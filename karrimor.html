@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Karrimor">
+    <meta name="author" content="Ciprian">
+
+    <title>Karrimor</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/dashboard.css" rel="stylesheet">
+	<style>
+		.glyphicon-refresh-animate {
+			-animation: spin .9s infinite linear;
+			-webkit-animation: spin2 .9s infinite linear;
+		}
+		@-webkit-keyframes spin2 {
+			from { -webkit-transform: rotate(0deg);}
+			to { -webkit-transform: rotate(360deg);}
+		}
+	</style>
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 class="page-header">All Karrimor Products:</h1>
+		  <table class="table table-striped">
+			  <thead>
+				<tr>
+				  <th>Poza</th>
+				  <th>Pret</th>
+				  <th>Nume</th>
+				</tr>
+			  </thead>
+			  <tbody id="detalii">
+				<tr align="center"><td colspan="3"><h2>Loading...<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></h2><span>Return in 5 minutes.</span></td></tr>
+			  </tbody>
+			</table>
+		</div>
+      </div>
+    </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+	<script>
+	// Initialize Firebase
+	var config = {
+	apiKey: "AIzaSyB6elNPp-DlmMHOdst6CthF09UdGE4Wark",
+	authDomain: "karrimor-6ad7f.firebaseapp.com",
+	databaseURL: "https://karrimor-6ad7f.firebaseio.com",
+	storageBucket: "",
+	};
+	firebase.initializeApp(config);
+	//var sportsProducts = firebase.database().ref("pages/0/results");
+	var sportsProducts = firebase.database().ref();
+
+	firebase.auth().signInWithEmailAndPassword("my@email.com", "password").then(function(firebaseUser) {
+	  //document.write("Signed in.");
+	}).catch(function(error) {
+	  document.write("<font color='red'>Authentication failed: ", error, "</font>");
+	});
+	sportsProducts.once("value", function(snapshot) {
+		var data = snapshot.val();
+		var prod = [];
+		//console.log(
+		for (var key in data) {
+			//console.log(data[key].currencysizelarge_price + "<br>");
+			//dasfgasfgs;
+			if (data.hasOwnProperty(key)) {
+				var price = data[key].currencysizelarge_price ? data[key].currencysizelarge_price : 'Nu are pret';
+				var name = data[key].producttext_link_text ? data[key].producttext_link_text : 'Nu are nume';
+				var img = data[key].productimagelist_image ? data[key].productimagelist_image : 'Nu are poza';
+				var moneda = data[key].currencysizelarge_price_currency ? data[key].currencysizelarge_price_currency : 'Nu are moneda';
+				var link = data[key].productsache_link ? data[key].productsache_link : 'Nu are adresa';
+				prod.push ({
+					price: price,
+					name: name,
+					img: img,
+					moneda: moneda,
+					link: link,
+				})
+			}
+		}
+		
+		//var i = 0;
+		/*for (var key in data) {
+			if (data.hasOwnProperty(key)) {
+				data2 = data[key].results;
+				for (var key2 in data2) {
+					if (data2.hasOwnProperty(key2)) {
+						//i++;
+						var price = data2[key2].currencysizelarge_price ? data2[key2].currencysizelarge_price : 'Nu are pret';
+						var name = data2[key2].producttext_link_text ? data2[key2].producttext_link_text : 'Nu are nume';
+						var img = data2[key2].productimagelist_image ? data2[key2].productimagelist_image : 'Nu are poza';
+						var moneda = data2[key2].currencysizelarge_price_currency ? data2[key2].currencysizelarge_price_currency : 'Nu are poza';
+						prod.push ({
+							price: price,
+							name: name,
+							img: img,
+							moneda: moneda,
+						})
+					}
+				}
+			}*/
+		//}
+		//document.write(i);
+		refresh(prod);
+	});
+	/*
+	(function($){
+		$.ascundLoading = function() {
+			//$("#loading").hide();
+			return this;
+		}; 
+	})(jQuery);
+		*/
+	function refresh(products) {
+		var detalii="";
+		for (var i = 0; i < products.length; i++) {
+			detalii+='<tr>';
+			detalii += '<td><img src = ' + products[i].img + '></td>';
+			detalii += '<td><h4>' + products[i].price + " " + products[i].moneda + '</h4></td>';
+			detalii += '<td><h4><a href='+ products[i].link + '>' + products[i].name + '</a></h4></td>';
+			detalii+='</tr>';
+
+			//detalii += "<img src = " + products[i].img + "><strong>" + products[i].price + " " + products[i].moneda + "</strong> - " + products[i].name + "<br>";
+		}
+		document.getElementById('detalii').innerHTML = detalii;
+		//$.ascundLoading();
+	}
+	</script>
+  </body>
+</html>
