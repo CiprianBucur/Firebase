@@ -39,6 +39,7 @@
 				<select class="form-control" id="nrProd" name="nrProd">
 					<option value="10">10</option>
 					<option value="100">100</option>
+					<option value="250">250</option>
 					<option value="500">500</option>
 					<option value="1000">1000</option>
 					<option value="-1">All</option>
@@ -117,7 +118,7 @@
 				for (var i = 0; i < products.length; i++) {
 					detalii+='<tr>';
 					detalii += '<td><img src = ' + products[i].img + '></td>';
-					detalii += '<td><h4>' + products[i].price + " " + products[i].moneda + '</h4></td>';
+					detalii += '<td><h4>' + products[i].price + '</h4></td>';
 					detalii += '<td><h4><a href='+ products[i].link + '>' + products[i].name + '</a></h4></td>';
 					detalii+='</tr>';
 				}
@@ -153,16 +154,17 @@
 						var data = snapshot.val();
 						for (var key in data) {
 							if (data.hasOwnProperty(key)) {
-								var price = data[key].currencysizelarge_price ? data[key].currencysizelarge_price : 'Nu are pret';
+								var price = data[key].currencysizelarge_price_source ? data[key].currencysizelarge_price_source : 'Nu are reducere';
+								if (price == 'Nu are reducere') {
+									price = data[key].smalltext_price_source ? data[key].smalltext_price_source : 'Nu are pret';
+								}
 								var name = data[key].producttext_link_text ? data[key].producttext_link_text : 'Nu are nume';
 								var img = data[key].productimagelist_image ? data[key].productimagelist_image : 'Nu are poza';
-								var moneda = data[key].currencysizelarge_price_currency ? data[key].currencysizelarge_price_currency : 'Nu are moneda';
 								var link = data[key].productsache_link ? data[key].productsache_link : 'Nu are adresa';
 								prod.push ({
 									price: price,
 									name: name,
 									img: img,
-									moneda: moneda,
 									link: link,
 								})
 							}
@@ -175,16 +177,17 @@
 						var data = snapshot.val();
 						for (var key in data) {
 							if (data.hasOwnProperty(key)) {
-								var price = data[key].currencysizelarge_price ? data[key].currencysizelarge_price : 'Nu are pret';
+								var price = data[key].currencysizelarge_price_source ? data[key].currencysizelarge_price_source : 'Nu are reducere';
+								if (price == 'Nu are reducere') {
+									price = data[key].smalltext_price_source ? data[key].smalltext_price_source : 'Nu are pret';
+								}
 								var name = data[key].producttext_link_text ? data[key].producttext_link_text : 'Nu are nume';
 								var img = data[key].productimagelist_image ? data[key].productimagelist_image : 'Nu are poza';
-								var moneda = data[key].currencysizelarge_price_currency ? data[key].currencysizelarge_price_currency : 'Nu are moneda';
 								var link = data[key].productsache_link ? data[key].productsache_link : 'Nu are adresa';
 								prod.push ({
 									price: price,
 									name: name,
 									img: img,
-									moneda: moneda,
 									link: link,
 								})
 							}
