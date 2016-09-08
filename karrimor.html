@@ -24,30 +24,39 @@
 
 		<div class="container">
 		  <div class="row">
-			<div class="col-md-1 sidebar">
-				<h4>Status: <span id="status">Unknown</span></h4>
-				<hr>
+			<div class="col-md-2 sidebar">
+				<h4><span id="status">Status: Unknown</span></h4>
+				
 				<form class="form-signin">
 					<h4>Authentication: </h4>
-					<input class="form-control" type="email" id="email" name="email" placeholder="E-mail">
-					<input class="form-control" type="password" id="password" name="password" placeholder="Password">
+					<input class="form-control" type="email" id="email" name="email" placeholder="E-mail" value="">
+					<input class="form-control" type="password" id="password" name="password" placeholder="Password" value="">
+					<br>
 				</form>
-				<br>
 				<button class="btn btn-default" id="sign_in" name="signin">Sign In</button>
+				<hr>
+				<label for="nrProd">Karrimor products: </label>
+				<select class="form-control" id="nrProd" name="nrProd">
+					<option value="10">10</option>
+					<option value="100">100</option>
+					<option value="500">500</option>
+					<option value="1000">1000</option>
+					<option value="-1">All</option>
+				</select>
 			</div>
 			<div class="col-md-10" id="produsele" style="display:none">
 				<br><br>
-			  <table id="tabel" class="table table-striped table-bordered" cellspacing="0" width="100%">
-				  <thead>
-					<tr>
-					  <th>Poza</th>
-					  <th>Pret</th>
-					  <th>Nume</th>
-					</tr>
-				  </thead>
-				  <tbody id="detalii">
-					<tr align="center"><td colspan="3"><h2>Loading...<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></h2><span>Return in 3 minutes.</span></td></tr>
-				  </tbody>
+				<table id="tabel" class="table table-striped table-bordered" cellspacing="0" width="100%">
+					<thead>
+						<tr>
+						  <th>Poza</th>
+						  <th>Pret</th>
+						  <th>Nume</th>
+						</tr>
+					</thead>
+					<tbody id="detalii">
+						<tr align="center"><td colspan="3"><h2>Loading...<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></h2><span>It may take a while.</span></td></tr>
+					</tbody>
 				</table>
 			</div>
 		  </div>
@@ -61,28 +70,35 @@
 				storageBucket: "",
 			};
 			firebase.initializeApp(config);
-			var sportsProducts = firebase.database().ref().limitToFirst(100);
-		
+
 			function init() {
 			  firebase.auth().onAuthStateChanged(function(user) {
 				if (user) {
 					$.logat(true);
-					document.getElementById('status').innerHTML = '<font color="green">Signed in</font>';
+					document.getElementById('status').innerHTML = '<br><font color="green">Signed in</font> as: ' + user.email + '.<br><br>';
 					document.getElementById('sign_in').textContent = 'Sign out';
-					afisareProduse();
+					changeProd();
+					document.getElementById('nrProd').addEventListener('change', changeProd, false);
 				} 
 				else {
-					//$.logat(false);
-					document.getElementById('status').innerHTML = '<font color="red">Signed out</font>';
+					$.logat(false);
+					document.getElementById('status').innerHTML = '';
 					document.getElementById('sign_in').textContent = 'Sign in';
 				}
 			  });
 			  document.getElementById('sign_in').addEventListener('click', toggleSignIn, false);
 			}
 
+			function changeProd() {
+				var nr = parseInt(document.getElementById('nrProd').value);
+				document.getElementById('produsele').innerHTML = '<br><br><table id="tabel" class="table table-striped table-bordered" cellspacing="0" width="100%"><thead><tr><th>Poza</th><th>Pret</th><th>Nume</th></tr></thead><tbody id="detalii"><tr align="center"><td colspan="3"><h2>Loading...<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></h2><span>It may take a while.</span></td></tr></tbody></table>';
+				afisareProduse(nr);				
+			}
 			function toggleSignIn() {
 				if (firebase.auth().currentUser) {
 					firebase.auth().signOut();
+					document.getElementById('nrProd').removeEventListener('change', changeProd, false);
+
 				} 
 				else {
 					var email = document.getElementById('email').value;
@@ -120,7 +136,7 @@
 						$(".form-signin").hide();
 					}
 					else {
-						$("#produsele").hide();
+					//	$("#produsele").hide();
 						$(".form-signin").show();
 					}
 
@@ -128,28 +144,54 @@
 				}; 
 			})(jQuery);
 
-			function afisareProduse() {
-				sportsProducts.once("value", function(snapshot) {
-					var data = snapshot.val();
-					var prod = [];
-					for (var key in data) {
-						if (data.hasOwnProperty(key)) {
-							var price = data[key].currencysizelarge_price ? data[key].currencysizelarge_price : 'Nu are pret';
-							var name = data[key].producttext_link_text ? data[key].producttext_link_text : 'Nu are nume';
-							var img = data[key].productimagelist_image ? data[key].productimagelist_image : 'Nu are poza';
-							var moneda = data[key].currencysizelarge_price_currency ? data[key].currencysizelarge_price_currency : 'Nu are moneda';
-							var link = data[key].productsache_link ? data[key].productsache_link : 'Nu are adresa';
-							prod.push ({
-								price: price,
-								name: name,
-								img: img,
-								moneda: moneda,
-								link: link,
-							})
+			function afisareProduse(nr) {
+				var prod = [];
+				var ref = firebase.database().ref();
+
+				if (nr > 0) {
+					ref.limitToFirst(nr).once("value", function(snapshot) {
+						var data = snapshot.val();
+						for (var key in data) {
+							if (data.hasOwnProperty(key)) {
+								var price = data[key].currencysizelarge_price ? data[key].currencysizelarge_price : 'Nu are pret';
+								var name = data[key].producttext_link_text ? data[key].producttext_link_text : 'Nu are nume';
+								var img = data[key].productimagelist_image ? data[key].productimagelist_image : 'Nu are poza';
+								var moneda = data[key].currencysizelarge_price_currency ? data[key].currencysizelarge_price_currency : 'Nu are moneda';
+								var link = data[key].productsache_link ? data[key].productsache_link : 'Nu are adresa';
+								prod.push ({
+									price: price,
+									name: name,
+									img: img,
+									moneda: moneda,
+									link: link,
+								})
+							}
 						}
-					}
-					refresh(prod);
-				});
+						refresh(prod);
+					});
+				}
+				else if (nr == -1) {
+					ref.once("value", function(snapshot) {
+						var data = snapshot.val();
+						for (var key in data) {
+							if (data.hasOwnProperty(key)) {
+								var price = data[key].currencysizelarge_price ? data[key].currencysizelarge_price : 'Nu are pret';
+								var name = data[key].producttext_link_text ? data[key].producttext_link_text : 'Nu are nume';
+								var img = data[key].productimagelist_image ? data[key].productimagelist_image : 'Nu are poza';
+								var moneda = data[key].currencysizelarge_price_currency ? data[key].currencysizelarge_price_currency : 'Nu are moneda';
+								var link = data[key].productsache_link ? data[key].productsache_link : 'Nu are adresa';
+								prod.push ({
+									price: price,
+									name: name,
+									img: img,
+									moneda: moneda,
+									link: link,
+								})
+							}
+						}
+						refresh(prod);
+					});
+				}
 			}
 		</script>
 	</body>
